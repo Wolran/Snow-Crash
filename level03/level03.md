@@ -23,6 +23,8 @@ nous avons du code en asm
 
 on vas desasembler le code pour voir ce quil fait 
 
+(ou pour voir le code en c = ctrl + e sur le main)
+
 pour ca clic droit sur le main: desassemble
 
 nous pouvon voir cette phrase 

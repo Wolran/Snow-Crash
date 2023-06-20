@@ -8,33 +8,31 @@ int main(int arc, char **arv)
 {
 	if (arc != 2)
 		return (printf("error\n"));
-	int j = strlen(arv[1]);
-	printf("j = %d\n", j);
 	int i = 0;
+	// arv 1 = "f4kmm6p|="
 	while(arv[1][i])
 	{
 		printf("%c\n", arv[1][i] - i);
 		i++;
 	}
-	printf(" i = %d\n", i);
 	printf("%c\n", 130 - i++);
-	printf(" i = %d\n", i);
-	printf("%c\n", '^' - i++);
-	printf("%c\n", '?' - i++);
+	printf("%c\n", 127 - i++);
 	printf("%c\n", 'p' - i++);
 	printf("%c\n", 130 - i++);
-	printf("%c\n", 'n' - i++); // non
+	printf("%c\n", 'n' - i++);
 	printf("%c\n", 131 - i++);
 	printf("%c\n", 130 - i++);
-	printf("DB ?\n");
-	i++;
+	printf("%c\n", 'D' - i++);
+	printf("%c\n", 'B' - i++);
 	printf("%c\n", 131 - i++);
-	printf("Du ?\n");
-	i++;
+	printf("%c\n", 'D' - i++);
+	printf("%c\n", 'u' - i++);
 	printf("%c\n", '{' - i++);
-	printf("%c\n", '^' - i++);
-	printf("%c\n", '?' - i++); // non
+	printf("%c\n", 127 - i++);
 	printf("%c\n", 140 - i++);
 	printf("%c\n", 137 - i++);
 	return 0;
 }
+
+// BD = -17
+// Du = -19

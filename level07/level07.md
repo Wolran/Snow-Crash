@@ -1,17 +1,30 @@
+# Rapport CTF - [level07]
 
+## Informations générales
+- **Durée :** [30 min]
+- **Équipe :** [vmuller]
+- **Participants :** [Valentin Muller]
 
-export LOGNAME='$(getflag)'
+## Réalisations
 
-./level07
+1. ### Objectif 1 - Transfert du fichier "level07" avec SCP
+   - **Description :** Transférer le fichier exécutable "level07" vers votre machine avec SCP.
+   - **Solution :** Les étapes suivantes ont été réalisées :
+     - Utilisation de la commande `scp` pour transférer le fichier "level07" depuis la machine distante vers votre machine locale.
 
-on reverse programme apeler level07
+2. ### Objectif 2 - Analyse du programme "level07" avec Ghidra
+   - **Description :** Analyser le programme "level07" avec l'aide de Ghidra pour comprendre son fonctionnement.
+   - **Solution :** Les étapes suivantes ont été suivies :
+     - Lancement de Ghidra.
+     - Importation du programme "level07" dans Ghidra.
+     - Observation que le programme affiche la valeur de la variable d'environnement "LOGNAME".
 
-on vois qu'il ne fait qu'afficher la variable d'environement apeller LOGNAME qui est normalement censer donner juste le nom du compte su lequel on est.
+3. ### Objectif 3 - Injection de commande "getflag"
+   - **Description :** Injecter la commande "getflag" dans la variable d'environnement "LOGNAME" pour obtenir le flag.
+   - **Solution :** Les étapes suivantes ont été réalisées :
+     - Modification de la valeur de la variable d'environnement "LOGNAME" avec la commande `export LOGNAME='$(getflag)'`.
+     - Lancement du programme "level07" avec `./level07`.
 
-du coup on a juste a changer la valeur de cette variable pour lui injecter un notre commande getflag
-
-export LOGNAME='$(getflag)'
-
-et on lance le ./level07 
-
-magie
+## Réflexions finales
+- **Expérience globale :** L'épreuve liée à level07 a nécessité la compréhension des variables d'environnement et l'injection de commandes pour obtenir le flag.
+- **Leçons apprises :** J'ai acquis des compétences en manipulation des variables d'environnement et en injection de commandes.

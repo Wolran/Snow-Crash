@@ -1,19 +1,11 @@
 # Rapport CTF - [Level00]
 
-## Informations générales
-- **Durée :** [2min]
-- **Équipe :** [vmuller]
-- **Participants :** [Valentin Muller]
 
-## Épreuves résolues
+quand on se connecte on ne trouve aucun fichier donc le but est de trouver un fichier qui a ete creer par notre utilisateur pour cella nous regardons tout les users du systeme J'ai utilisé la commande `cat /etc/passwd`
 
-1. ### Objectif 1 - Identification de l'utilisateur actuel
-   - **Description :** L'épreuve consistait à déterminer quel utilisateur est actuellement connecté.
-   - **Solution :** Pour trouver l'utilisateur actuel, j'ai utilisé la commande `whoami`.
-   
-2. ### Objectif 2 - Exploration du système de fichiers
-   - **Description :** L'objectif était de naviguer dans le système de fichiers pour obtenir des informations.
-   - **Solution :** J'ai utilisé les commandes `ls -la` pour afficher les fichiers et répertoires avec des détails, et `cd /` pour revenir à la racine du système de fichiers.
+et ensuite nous trouvons tous les fichiers que mon user a creer : `find ./ -user "user_name" -type f`
+
+
 
 3. ### Objectif 3 - Liste des utilisateurs
    - **Description :** Cette épreuve impliquait la recherche de la liste de tous les utilisateurs du système.

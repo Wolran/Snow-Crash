@@ -36,3 +36,15 @@ int main(int arc, char **arv)
 
 // BD = -17
 // Du = -19
+
+
+//f3iji1j{wgxcwu63s3chkws
+//f3iji1ju5yuevaus41q1afiuq
+
+f4kmm6p|=\x82\x7f p \x82n\x83\x82DB\x83Du{\x7f\x8c\x89
+
+f4kmm6p|=M-^B^?pM-^BnM-^CM-^BDBM-^CDu{^?M-^LM-^I
+
+\x66\x34\x6b\x6d\x6d\x36\x70\x7c\x3d\x82\x7f\x70\x82\x6e\x83\x82\x44\x42\x83\x44\x75\x7b\x7f\x8c\x89
+
+66 34 6b 6d 6d 36 70 7c 3d 82 7f 70 82 6e 83 82

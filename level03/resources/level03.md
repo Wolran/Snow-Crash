@@ -1,11 +1,18 @@
 # Rapport CTF - [level03]
 
-## Informations générales
-- **Durée :** [2h]
-- **Équipe :** [vmuller]
-- **Participants :** [Valentin Muller]
 
-## Réalisations
+
+
+
+
+
+
+
+
+
+
+
+
 
 1. ### Objectif 1 - Analyse de l'exécutable
    - **Description :** L'épreuve consistait à analyser un exécutable qui affiche le message "exploit me" lorsqu'il est exécuté.
@@ -44,7 +51,3 @@
      - Exécution de l'exécutable "level03" avec `./level03` pour constater qu'il appartient au groupe "flag03".
      - Modification du fichier "echo" pour exécuter `getflag` avec `echo getflag > /tmp/echo`.
      - Exécution de "level03" à nouveau pour obtenir le token : "qi0maab88jeaj46qoumi7maus".
-
-## Réflexions finales
-- **Expérience globale :** L'épreuve liée à level03 a été une expérience de débogage intéressante qui a nécessité des compétences en analyse de code et en exploitation de vulnérabilités.
-- **Leçons apprises :** J'ai acquis de nouvelles compétences en analysant le code avec Ghidra et en exploitant une vulnérabilité pour exécuter des commandes.

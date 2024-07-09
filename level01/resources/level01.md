@@ -1,11 +1,26 @@
 # Rapport CTF - [level01]
 
-## Informations générales
-- **Durée :** [10 min]
-- **Équipe :** [vmuller]
-- **Participants :** [Valentin Muller]
 
-## Réalisations
+dans le level precedant nous avons trouver une chaine de carractere etrange au niveau de l'identifiant de l'utilisateur flag01:
+- 42hDRfypTqqnw
+
+on le test mais ca ne fonctionne pas, on pense que c'est un fichier crypter, nous allons donc utliser john the ripper qui est un logiciel pour pouvoir facilement decripter notre mots de passe:
+- mettre notre mdp dans un fichier `.txt`
+- lancer john the ripper avec le fichier `john --single "fichier".txt`
+- Affichage du résultat avec `john --show "fichier".txt`
+
+cella révéle le mot de passe "abcdefg" que nous pouvons utiliser sur l'utiisateur flag01 pour pouvoir getflag et obtenir le mdp de l'utilisateur level02
+
+
+
+
+
+
+
+
+
+
+
 
 1. ### Objectif 1 - Identification de l'utilisateur actuel
    - **Description :** Trouver l'utilisateur actuellement connecté.
@@ -26,6 +41,3 @@
 5. ### Objectif 5 - Élévation des privilèges
    - **Description :** Accéder au compte de l'utilisateur "flag02" avec le mot de passe "abcdefg".
    - **Solution :** Utilisation de la commande `su flag02 abcdefg` pour accéder au compte et obtenir le flag avec `getflag`.
-
-## Réflexions finales
-- J'ai acquis de nouvelles compétences en décryptage de mots de passe à l'aide de John the Ripper.

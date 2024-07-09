@@ -1,12 +1,5 @@
 # Rapport CTF - [level04]
 
-## Informations générales
-- **Durée :** [2h]
-- **Équipe :** [vmuller]
-- **Participants :** [Valentin Muller]
-
-## Réalisations
-
 1. ### Objectif 1 - Exploration des fichiers
    - **Description :** L'épreuve consistait à explorer les fichiers disponibles sur la machine.
    - **Solution :** Les étapes suivantes ont été réalisées :
@@ -39,7 +32,3 @@
    - **Solution :** Les étapes suivantes ont été réalisées :
      - Exécution de la commande "getflag" via l'URL exploitée.
      - Obtention du token : "ne2searoevaevoem4ov4ar8ap".
-
-## Réflexions finales
-- **Expérience globale :** L'épreuve liée à level04 a été une expérience de détection et d'exploitation de vulnérabilités intéressante, nécessitant des compétences en analyse de code et en exécution de commandes à distance.
-- **Leçons apprises :** J'ai acquis de nouvelles compétences en analysant le code Perl, en identifiant des vulnérabilités et en exécutant des commandes à distance.

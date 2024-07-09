@@ -1,11 +1,14 @@
 # Rapport CTF - [level07]
 
-## Informations générales
-- **Durée :** [30 min]
-- **Équipe :** [vmuller]
-- **Participants :** [Valentin Muller]
+ici on peux voir un executable `level07` avec les drois de flag07
 
-## Réalisations
+on vas le decompiler avec ghidra:
+- on peux voir qu'il execute la variable LOGNAME pour nous donner notre nom d'utilisateur
+
+on a juste a changer cette variable pour demander un getflag avec les drois de level07: `export LOGNAME='$(getflag)'`
+
+nous avons donc directement le mdp de level08 sans avoir le flag07
+
 
 1. ### Objectif 1 - Transfert du fichier "level07" avec SCP
    - **Description :** Transférer le fichier exécutable "level07" vers votre machine avec SCP.
@@ -24,7 +27,3 @@
    - **Solution :** Les étapes suivantes ont été réalisées :
      - Modification de la valeur de la variable d'environnement "LOGNAME" avec la commande `export LOGNAME='$(getflag)'`.
      - Lancement du programme "level07" avec `./level07`.
-
-## Réflexions finales
-- **Expérience globale :** L'épreuve liée à level07 a nécessité la compréhension des variables d'environnement et l'injection de commandes pour obtenir le flag.
-- **Leçons apprises :** J'ai acquis des compétences en manipulation des variables d'environnement et en injection de commandes.

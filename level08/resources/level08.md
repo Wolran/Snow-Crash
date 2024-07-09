@@ -1,11 +1,17 @@
 # Rapport CTF - [level08]
 
-## Informations générales
-- **Durée :** [3h]
-- **Équipe :** [vmuller]
-- **Participants :** [Valentin Muller]
+ici nous observons 2 fichier `level08` et `token`
+nous pouvons voir que token est creer par l'utilisateur flag08
 
-## Réalisations
+nous allons decompiler l'executable avec ghidra pour voir ce qu'il contient:
+- nous pouvons voir que l'executable ouvre le fichier suivant si seulement il ne se nome pas `token`
+
+a partir de ce constat la rien de plus simple nous allons creer un lin symbolique (une sorte de racourcis) avec `token` pour pouvoir obtenir un nouveau nom:
+- on effectue cette commande: `ln -s /home/user/level08/token /tmp/test`
+
+ensuite nous n'avons plus qu'a lancer notre programme avec le nouveau lien: `./level08 /tmp/test`
+
+nous obtenon un flag pour pouvoir se connecter a flag08
 
 1. ### Objectif 1 - Analyse de l'épreuve "level08" avec Ghidra
    - **Description :** Analyser l'épreuve "level08" à l'aide de Ghidra pour comprendre son fonctionnement.
@@ -30,6 +36,3 @@
      - Passage à l'utilisateur "level08" avec `su level08`.
      - Exécution de la commande `getflag` pour obtenir le flag recherché.
 
-## Réflexions finales
-- **Expérience globale :** L'épreuve liée à level08 a nécessité la compréhension des droits d'accès aux fichiers et la création d'un lien symbolique pour accéder au flag.
-- **Leçons apprises :** J'ai acquis des compétences en gestion des permissions de fichiers et en utilisation de liens symboliques.

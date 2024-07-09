@@ -1,12 +1,5 @@
 # Rapport CTF - [level05]
 
-## Informations générales
-- **Durée :** [1h]
-- **Équipe :** [vmuller]
-- **Participants :** [Valentin Muller]
-
-## Réalisations
-
 1. ### Objectif 1 - Recherche du fichier "mail"
    - **Description :** L'épreuve consistait à rechercher le fichier "mail" pour trouver des informations importantes.
    - **Solution :** Les étapes suivantes ont été réalisées :
@@ -51,7 +44,3 @@
    - **Solution :** Les étapes suivantes ont été réalisées :
      - Navigation vers le répertoire "/tmp".
      - Affichage du contenu du fichier "resultat.txt" avec `cat resultat.txt` pour obtenir le token : "viuaaale9huek52boumoomioc".
-
-## Réflexions finales
-- **Expérience globale :** L'épreuve liée à level05 a nécessité la compréhension des autorisations de fichiers et l'exploitation d'une vulnérabilité pour exécuter une commande malveillante.
-- **Leçons apprises :** J'ai acquis des compétences en analyse de scripts et en création de programmes malveillants pour exploiter des privilèges.

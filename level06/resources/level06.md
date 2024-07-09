@@ -1,12 +1,5 @@
 # Rapport CTF - [level06]
 
-## Informations générales
-- **Durée :** [7h]
-- **Équipe :** [vmuller]
-- **Participants :** [Valentin Muller]
-
-## Réalisations
-
 1. ### Objectif 1 - Création d'un fichier d'exploit
    - **Description :** L'épreuve consistait à créer un fichier d'exploit pour le programme "level06".
    - **Solution :** Les étapes suivantes ont été réalisées :
@@ -31,7 +24,3 @@
    - **Description :** Exécuter le code malveillant injecté dans la fonction "y".
    - **Solution :** Les étapes suivantes ont été réalisées :
      - Lancement du programme "level06" en utilisant le fichier "exploit" avec `./level06 /tmp/exploit`.
-
-## Réflexions finales
-- **Expérience globale :** L'épreuve liée à level06 a nécessité la compréhension de l'injection de code et de l'exécution de code malveillant dans un programme.
-- **Leçons apprises :** J'ai acquis des compétences en injection de code PHP.

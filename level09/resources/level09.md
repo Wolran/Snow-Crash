@@ -1,11 +1,21 @@
 # Rapport CTF - [level09]
 
-## Informations générales
-- **Durée :** [4h]
-- **Équipe :** [vmuller]
-- **Participants :** [Valentin Muller]
 
-## Réalisations
+on trouve un executable `level09` et un fichier `token` avec des caractere non printable (surement encoder donc)
+On vas essayer de comprendre comment l'executable fonctonne:
+- on ouvre ghidra et on regarde ce aue donne l'executable
+- on comprend que a chaque caractere de ARVG[1] on augmente ca valeur de i++
+- on a juste a creer un programme qui permet d'inverser tout ca et lui donner le fichier `token`
+
+pour connaitre les caracteres non printable, pour ca nous allons utiliser l'hexdump : `printf $(cat ./token) | hexdump -C`
+cette commande va nous permettre d'ecrire tout le contenu de notre fichier token en octet hexadecimal 
+
+ensuite nous avons plus qu'a rediriger tout le contenu obtenu dans une chaine de caractere pour que notre programme puisse la dechifrer: 
+`./a.out <<< echo $(printf "\x66\x34\x6b\x6d\x6d\x36\x70\x7c\x3d\x82\x7f\x70\x82\x6e\x83\x82\x44\x42\x83\x44\x75\x7b\x7f\x8c\x89")`
+
+nous avons enfin notre flag pour pouvoir jmp a l'utilisateur `flag09`
+
+
 
 1. ### Objectif 1 - Analyse du programme "level09" avec Ghidra
    - **Description :** Analyser le programme "level09" avec Ghidra pour comprendre son fonctionnement.
@@ -24,7 +34,7 @@
    - **Description :** Décoder le contenu du fichier "flag.txt" à l'aide du programme créé.
    - **Solution :** Les étapes suivantes ont été réalisées :
      - Exécution du programme en C sur le fichier "flag.txt".
-     - Flag encodé : "<82>^?p<82>n<83><82>DB<83>Du{^?<8c><89>".
+     - Flag encodé : "f4kmm6p|=<82>^?p<82>n<83><82>DB<83>Du{^?<8c><89>".
      - Obtention du flag décodé : "f3iji1ju5yuevaus41q1afiuq".
 
 4. ### Objectif 4 - Accès à l'utilisateur "flag09"
@@ -33,6 +43,4 @@
      - Passage à l'utilisateur "flag09" avec `su flag09`.
      - Exécution de la commande `getflag` pour obtenir le flag final.
 
-## Réflexions finales
-- **Expérience globale :** L'épreuve liée à level09 a nécessité la compréhension de l'encodage et du décodage des caractères ASCII.
-- **Leçons apprises :** J'ai acquis des compétences en programmation C pour le décodage de données.
+

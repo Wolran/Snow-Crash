@@ -1,26 +1,37 @@
 # Rapport CTF - [Level00]
 
+### Observation:
+Quand on se connecte, on ne trouve aucun fichier donc le but est de trouver un fichier qui a été créer par notre utilisateur pour cella nous regardons tous les users du système: `cat /etc/passwd`
 
-quand on se connecte on ne trouve aucun fichier donc le but est de trouver un fichier qui a ete creer par notre utilisateur pour cella nous regardons tout les users du systeme J'ai utilisé la commande `cat /etc/passwd`
-
-et ensuite nous trouvons tous les fichiers que mon user a creer : `find ./ -user "user_name" -type f`
-
-
-
-3. ### Objectif 3 - Liste des utilisateurs
-   - **Description :** Cette épreuve impliquait la recherche de la liste de tous les utilisateurs du système.
-   - **Solution :** J'ai utilisé la commande `cat /etc/passwd` pour afficher la liste de tous les utilisateurs du système.
-
-4. ### Objectif 4 - Recherche de fichiers par utilisateur
-   - **Description :** L'objectif était de trouver tous les fichiers créés par un utilisateur spécifique.
-   - **Solution :** J'ai utilisé la commande `find ./ -user "user_name" -type f` en remplaçant "user_name" par le nom de l'utilisateur cible pour afficher tous les fichiers qu'il a créés.
-
-5. ### Objectif 5 - Décodage du flag
-   - **Description :** L'épreuve consistait à décoder un flag chiffré.
-   - **Solution :** J'ai utilisé un décodage par substitution en appliquant d'abord ROT16, suivi de ROT10, pour obtenir le flag déchiffré, qui était "nottoohardhere".
-
-6. ### Objectif 6 - Élévation des privilèges
-   - **Description :** L'objectif était d'accéder au compte de l'utilisateur "level00".
-   - **Solution :** J'ai utilisé la commande `su level00` pour passer au compte de l'utilisateur "level00" et obtenir le flag avec la commande `getflag`
+Nous pouvons voir plusieurs chose:
+- Il y a plusieurs types de users: `levelxx` et `flagxx`
+- On peut voir une étrange chaîne de caractère au niveau de l'utilisateur flag01 (elle nous servira plus tard)
 
 
+
+
+
+### Solution :
+
+Le but de ce level est donc de trouver un moyen de se connecter a l'utilisateur flag00 pour pouvoir obtenir le mot de passe de level01
+
+En continuant nos recherches, nous trouvons tous les fichiers que flag00 a créer : `find / -type f -user flag00 2>/dev/null` ou `ls -lRa 2>/dev/null| grep "flag00"`
+
+Nous pouvons voir un fichier étrange vu la date ou le nom: 
+```bash
+----r--r--  1 flag00  flag00      15 Mar  5  2016 john
+----r--r--  1 flag00  flag00      15 Mar  5  2016 john
+```
+
+```sh
+/usr/sbin/john
+/rofs/usr/sbin/john
+```
+
+john nous rappelle l'outil de décryptage john the ripper.
+Ouvrons-le pour voir: `cat /usr/sbin/john`
+cela nous donne une sorte de mot de passe: `cdiiddwpgswtgt`
+On le teste, mais cela ne fonctionne pas, vu que le fichier s'appelle john on suppose que le mot de passe est encrypter.
+On met le mot de passe encrypté dans un décrypteur online et on obtient: `nottoohardhere`
+
+On test le flag `nottoohardhere` et ça fonctionne, il ne reste plus qu'à `getflag` pour obtenir notre mot de passe de level01

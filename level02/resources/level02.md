@@ -1,33 +1,59 @@
 # Rapport CTF - [level02]
 
-1. ### Objectif 1 - Analyse d'un fichier PCAP
-   - **Description :** L'épreuve consistait à analyser un fichier "level02.pcap" pour obtenir des informations importantes.
-   - **Solution :** Les étapes suivantes ont été réalisées pour résoudre l'épreuve :
-     - Exécution de `ls` pour afficher les fichiers dans le répertoire.
-     - Découverte du fichier "level02.pcap".
-     - Utilisation de Wireshark pour analyser le contenu du fichier PCAP.
-   
-2. ### Objectif 2 - Transfert du fichier vers un serveur Linux
-   - **Description :** Transférer le fichier "level02.pcap" depuis la machine de capture vers un serveur Linux pour une analyse plus approfondie.
-   - **Solution :** Les étapes suivantes ont été suivies :
-     - Utilisation de la commande `scp` pour transférer le fichier depuis la machine de capture vers le serveur Linux.
-     - Commande utilisée : `scp level02.pcap vmuller@192.168.1.21:/home/vmuller`.
-     - Attribution des permissions appropriées avec `chmod 777 level02.pcap`.
+### Observation:
+En arrivant sur le level on trouve un fichier pcap (packet capture) nommer `level02.pcap` qui a été créer par flag02: `ls -la`
 
-3. ### Objectif 3 - Analyse du fichier PCAP avec Wireshark
-   - **Description :** Analyser le fichier PCAP avec Wireshark pour examiner les données de la communication.
-   - **Solution :** Les étapes suivantes ont été réalisées :
-     - Ouverture du fichier "level02.pcap" avec Wireshark.
-     - Identification d'un flux TCP dans la capture.
-     - Exploration des données en utilisant l'option "Suivre" pour le protocole TCP.
+### Code:
+On utilise la commande `scp` pour ramener le fichier sur notre pc:
+`scp -P {PORT} level02@localhost:/home/user/level02/level02.pcap .`
+On lui donne les droits:
+`chmod 777 ./level2.pcap`
 
-4. ### Objectif 4 - Découverte du mot de passe caché
-   - **Description :** Identifier un mot de passe caché dans la capture.
-   - **Solution :** Les étapes suivantes ont été effectuées :
-     - Identification d'un message contenant "Password: ft_wandr...NDRel.L0L" les . sont des {7f} qui represente 127 en decimal, qui ne semble pas être le flag correct.
-     - Analyse de l'hexdump pour comprendre la signification des caractères "7f" (delete).
-     - Conversion des caractères "delete" en supprimant les caractères en trop pour obtenir le flag "ft_waNDReL0L".
+On ouvre notre fichier pcap avec wireshark pour analyser son flux TCP:
+`wireshark ./level02.pcap`
 
-5. ### Objectif 5 - Obtention du flag
-   - **Description :** Utilisation du flag découvert pour obtenir le flag final.
-   - **Solution :** Utilisation de la commande `getflag` pour obtenir le flag final après avoir découvert "ft_waNDReL0L".
+On va suivre notre flux TCP, donc dans wireshark on va dans: `analyze/follow/TCP Stream`:
+```
+Linux 2.6.38-8-generic-pae (::ffff:10.1.1.2) (pts/10)
+
+..wwwbugs login: l.le.ev.ve.el.lX.X
+..
+Password: ft_wandr...NDRel.L0L
+.
+..
+Login incorrect
+wwwbugs login: 
+```
+
+On ouvre ensuite l'hexdump et on obtient ça:
+```
+000000D6  00 0d 0a 50 61 73 73 77  6f 72 64 3a 20            ...Passw ord: 
+000000B9  66                                                 f
+000000BA  74                                                 t
+000000BB  5f                                                 _
+000000BC  77                                                 w
+000000BD  61                                                 a
+000000BE  6e                                                 n
+000000BF  64                                                 d
+000000C0  72                                                 r
+000000C1  7f                                                 .
+000000C2  7f                                                 .
+000000C3  7f                                                 .
+000000C4  4e                                                 N
+000000C5  44                                                 D
+000000C6  52                                                 R
+000000C7  65                                                 e
+000000C8  6c                                                 l
+000000C9  7f                                                 .
+000000CA  4c                                                 L
+000000CB  30                                                 0
+000000CC  4c                                                 L
+000000CD  0d                                                 .
+```
+
+
+### Solution :
+
+Nous avons donc le flag en clair, mais pas totalement, car les '.' Sont en relater des caractères `7f` en hexadécimal et donc un caractère `DEL` (delete) en ASCII.
+Nous enlevons donc une lettre à chaque fois que nous avons un caractère `DEL` et nous obtenons le flag : ft_waNDReL0L
+

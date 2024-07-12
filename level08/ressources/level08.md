@@ -2,7 +2,7 @@
 
 ### Observation:
 Nous observons 2 fichier `level08` et `token` \
-Nous pouvons voir que token est créer par l'utilisateur flag08
+Nous pouvons voir que token est créé par l'utilisateur flag08
 
 
 ### Code::
@@ -35,11 +35,11 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   return write(1, buf, v5);
 }
 ```
-On peux voir que l'exécutable lis les fichier passer en parametre, mais seulement il ne ce nome pas `token`
+On peux voir que l'exécutable lis les fichier passés en paramètre, mais seulement il ne ce nomme pas `token`
 
 ### Solution:
 
-À partir de ce constat, rien de plus simple, nous allons créer un lien symbolique avec le fichier `token` pour pouvoir obtenir un raccourci qui ne porte pas le même nom et qui donc pourra être lu par `level08`. 
+À partir de ce constat, rien de plus simple, nous allons créer un lien symbolique avec le fichier `token` pour pouvoir obtenir un raccourci qui ne porte pas le même nom et qui pourra donc être lu par `level08`. 
 
 On effectue cette commande: `ln -s /home/user/level08/token /tmp/try`
 

@@ -1,10 +1,10 @@
 # Rapport CTF - [level04]
 
 ### Observation:
-En arrivant sur le level on trouve un script perl nommer `level04.pl` qui a été créer par flag04 et donc a les droits d'utiliser des commandes de flag04.
+En arrivant sur le niveau on trouve un script perl nommé `level04.pl` qui a été créé par flag04 et donc a les droits d'utiliser des commandes en tant qu'utilisateur 'flag04'.
 
 ### Code:
-On `cat` le code `cat level04.pl`:
+On `cat` le script:
 ```pl
 #!/usr/bin/perl
 # localhost:4747
@@ -17,7 +17,7 @@ print `echo $y 2>&1`;
 x(param("x"));
 ```
 
-On peut voir que le code print la variable `y` qui est le premier argument de `x`
+On peut voir que le code affiche la variable `y` qui est le premier argument de la liste `x`
 
 
 ### Solution :

@@ -62,12 +62,12 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 
 ##### Fonctionnement:
 C'est un programme simple composé de deux fonctions:
- - La fonction \<main> qui exécute la fonction \<ft_des> si l'utilisateur qui exécute le programme a l'id 4242.
- - La fonction \<dt_des> qui décrypte une chaine de caracteres encryptée au format 'des'
+ - La fonction `<main>` qui exécute la fonction `<ft_des>` si l'utilisateur qui exécute le programme a l'id `4242`.
+ - La fonction `<dt_des>` qui décrypte une chaine de caracteres encryptée au format `des`
 
 ##### Conclusions:
 Le token que nous cherchons est directement présent dans le code mais encrypté, \
-il nous suffit d'isoler l'effet de la fonction \<ft_des> pour l'obtenir.
+il nous suffit d'isoler l'effet de la fonction `<ft_des>` pour l'obtenir.
 
 ### Résolution
 Je copie le programme en enlevant la securite qui vérifie l'id utilisateur, ensuite je le compile, puis l'exécute.

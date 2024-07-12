@@ -1,7 +1,7 @@
 # Rapport CTF - [level02]
 
 ### Observation:
-En arrivant sur le level on trouve un fichier pcap (packet capture) nommer `level02.pcap` qui a été créer par flag02: `ls -la`
+En arrivant sur le niveau on trouve un fichier pcap (packet capture) nommé `level02.pcap` qui a été créé par flag02: `ls -la`
 
 ### Code:
 On utilise la commande `scp` pour ramener le fichier sur notre pc:
@@ -12,7 +12,7 @@ On lui donne les droits:
 On ouvre notre fichier pcap avec wireshark pour analyser son flux TCP:
 `wireshark ./level02.pcap`
 
-On va suivre notre flux TCP, donc dans wireshark on va dans: `analyze/follow/TCP Stream`:
+On va suivre notre flux TCP, donc dans wireshark nous allons dans: `analyze/follow/TCP Stream`:
 ```
 Linux 2.6.38-8-generic-pae (::ffff:10.1.1.2) (pts/10)
 
@@ -54,6 +54,6 @@ On ouvre ensuite l'hexdump et on obtient ça:
 
 ### Solution :
 
-Nous avons donc le flag en clair, mais pas totalement, car les '.' Sont en relater des caractères `7f` en hexadécimal et donc un caractère `DEL` (delete) en ASCII.
+Nous avons donc le flag en clair, mais pas totalement, car les '.' Sont en realité des caractères `7f` en hexadécimal et donc un caractère `DEL` (delete) en ASCII.
 Nous enlevons donc une lettre à chaque fois que nous avons un caractère `DEL` et nous obtenons le flag : ft_waNDReL0L
 

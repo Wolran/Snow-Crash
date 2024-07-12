@@ -93,7 +93,7 @@ Je créé un script qui effectue trois opérations distinctes en parallele.
  1. La premiere consiste en une boucle qui créé un lien symbolique vers un fichier accessible par l'utilisateur \
  pour ensuite le modifier vers un fichier innaccessible par l'utilisateur.
 
- 2. La seconde est composée d'une boucle qui exécute le programme '~/level10' tout en pointant sur le lien symbolique \
+ 2. La seconde est composée d'une boucle qui exécute le programme `~/level10` tout en pointant sur le lien symbolique \
  créé et modifié par la boucle de l'opération précédente.
 
  3. La dernière est une simple boucle qui récupère les données circulant sur le port réseau 6969 et affiche le resultat \

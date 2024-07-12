@@ -44,7 +44,7 @@ end
 -rwsr-sr-x  1 flag11  level11  668 Mar  5  2016 level11.lua
 ```
 
-Je me rend compte que ce programme est exécuté par défaut en tant qu'utilisateur 'flag11' grâce à la commande:
+Je me rend compte que ce programme est exécuté par défaut en tant qu'utilisateur`flag11` grâce à la commande:
 ```sh
 ps aux | grep flag11
 ```
@@ -56,7 +56,7 @@ string mot_de_passe
 
 ##### Fonctionnement:
 Le programme est un serveur tcp qui tente de hasher la chaîne de caractères entrée par l'utilisateur. \
-Il compare ensuite la chaîne hashée avec une chaîne prédefinie pour afficher différents messages inutiles. 
+Il compare ensuite la chaîne hashée avec une chaîne prédefinie pour afficher différents messages ***~~inutiles~~***. 
 
 > Le serveur est hebergé sur l'addresse ip '127.0.0.1' avec le port '5151'.
 
@@ -64,15 +64,15 @@ Il compare ensuite la chaîne hashée avec une chaîne prédefinie pour afficher
 
 ##### Conclusions:
 La fonction hash a une vulnérabilité qui nous laisse exécuter du code shell comme nous le voulons. \
-Vu que ce programme est exécuté par l'utilisateur 'flag11' par défaut nous pouvons avoir accès à son flag.
+Vu que ce programme est exécuté par l'utilisateur `flag11` par défaut nous pouvons avoir accès à son flag.
 
 > La ligne suivante est la cause de la vulnérabilité: \
 > prog = io.popen("echo "..pass.." | sha1sum", "r")
 
 ### Résolution
-J'effectue une commande qui permet d'obtenir le résultat de la commande 'getflag' une fois dans le programme. \
+J'effectue une commande qui permet d'obtenir le résultat de la commande `getflag` une fois dans le programme. \
 Elle fonctionne car il suffit de créer un sous shell pour sortir de l'exécution classique du programme.\
-Par la suite je redirige la sortie de cette dernière dans un fichier accessible car je ne pouvais pas la voir autrement.1 \
+Par la suite je redirige la sortie de cette dernière dans un fichier accessible car je ne pouvais pas la voir autrement. \
 J'affiche ensuite le contenu de ce fichier.
 
 #### commandes:

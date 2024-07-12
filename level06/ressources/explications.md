@@ -79,18 +79,18 @@ char *chemin_fichier
 
 ##### Fonctionnement:
 Il y a deux programmes:
- 1. Le premier est un programme c qui exécute un script php '~/level06.php' avec les droit de l'utilisateur 'flag06'.
- 2. Le deuxieme applique un motif regex '/(\[x (.*)\])/e' qui transforme le contenue du fichier par le contenu du deuxieme argument après l'avoir évalué.
+ 1. Le premier est un programme `c` qui exécute un script php `~/level06.php` avec les droit de l'utilisateur `flag06`.
+ 2. Le deuxieme applique un motif regex `/(\[x (.*)\])/e` qui transforme le contenue du fichier par le contenu du deuxieme argument après l'avoir évalué.
 
 ##### Conclusions:
-La fonction de remplacement de motif regex preg_replace avec le parametre '/e' est connue pour avoir des failles. \
+La fonction de remplacement de motif regex preg_replace avec le parametre `/e` est connue pour avoir des failles. \
 En effet le parametre permet d'exécuter du code php. \
 Je peux donc exécuter du code shell librement.
 
 ### Résolution
-Je créé un fichier qui contient mon injection de code, puis je passe le chemin d'acces de ce dernier au programme '~/level6'. \
-Le contenue de la deuxieme couche de regex est evaluée en php car l'opérateur '/e' est utilisé. \
-Le parseur php exécute ensuite 'getflag' car il est entouré par les caractéres '`'. \
+Je créé un fichier qui contient mon injection de code, puis je passe le chemin d'acces de ce dernier au programme `~/level6`. \
+Le contenue de la deuxieme couche de regex est evaluée en php car l'opérateur `/e` est utilisé. \
+Le parseur php exécute ensuite 'getflag' car il est entouré par les caractéres `´`. \
 J'exécute ensuite le programme.
 
 #### commandes:

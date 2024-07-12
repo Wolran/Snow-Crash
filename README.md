@@ -1,1 +1,1 @@
-# snow_crash
+![Our flag](/.img/hehe.jpg)

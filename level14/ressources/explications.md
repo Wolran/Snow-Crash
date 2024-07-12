@@ -2,7 +2,7 @@
 
 ### Observations
 Il n'y a rien de visiblement disponible pour nous dans tout l'ordinateur. \
-Je décompile donc le seul programme disponible, 'getflag'.
+Je décompile donc le seul programme disponible, `getflag`.
 
 ##### Je décompile le programme '/bin/getflag':
 ```c
@@ -159,16 +159,16 @@ int	main()
 ```
 
 ##### Fonctionnement:
-Le programme recupere l'id utilisateur puis affiche son token au prealable décrypte par la fonction \<ft_des>.
+Le programme recupere l'id utilisateur puis affiche son token au préalable décrypte par la fonction `<ft_des>`.
 
 ##### Conclusions:
-Il me suffit d'exécuter une copie du programme avec l'appel a \<getuid> remplace par l'id de l'utilisateur 'flag14'.
+Il me suffit d'exécuter une copie du programme avec l'appel a `<getuid>` remplace par l'id de l'utilisateur `flag14`.
 
 ### Résolution
-Je copie le programme en remplacant l'appel a \<getuid> par l'id de l'utilisateur 'flag14'.
+Je copie le programme en remplacant l'appel a `<getuid>` par l'id de l'utilisateur `flag14`.
 Puis compile le code pour ensuite l'exécuter.
 
-> L'id d'un utilisateur peut etre recupere grace a la commande: 'id -u \<nom_utilisateur>'
+> L'id d'un utilisateur peut etre recupere grace a la commande: `id -u \<nom_utilisateur>`
 
 ##### /tmp/getflag.c :
 ```c

@@ -1,1 +1,1 @@
-![Our flag](/.img/hehe.jpg)
+42 School's CTF 
